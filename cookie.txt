@@ -1,0 +1,7 @@
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.zongheng.com	TRUE	/	FALSE	1563816005	ZHID	D432E9475825816749D5DB0C2B09CFCD
+.zongheng.com	TRUE	/	FALSE		___bz	408586|42443131|a1de0c|aladin2_freexx
+.zongheng.com	TRUE	/	FALSE		platform	H5
