@@ -1,6 +1,6 @@
 # Zongheng_novel_spider
 ---
-After visiting a site redirected from `m.baidu.com`, some novels on [zhongheng](www.zongheng.com) is free to read without any order info.
+After visiting a site redirected from `m.baidu.com`, some novels on [zhongheng](http://www.zongheng.com/) is free to read without any order info.
 
 But that link is varying according to time, so I use a spider to get that free link and save the cookie info, with the cookie, the spider will get the novel easily.
 
