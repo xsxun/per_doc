@@ -1,4 +1,6 @@
-# Zongheng_novel_spider
+# （Dead）Zongheng_novel_spider
+---
+Useless for now
 ---
 After visiting a site redirected from `m.baidu.com`, some novels on [zhongheng](http://www.zongheng.com/) is free to read without any order info.
 
