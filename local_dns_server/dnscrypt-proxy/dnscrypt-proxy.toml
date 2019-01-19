@@ -1,0 +1,113 @@
+##################################
+#         Global settings        #
+##################################
+#listen_addresses = ['0.0.0.0:5300','[::1]:5300']
+listen_addresses = ['127.0.0.1:5300', '[::1]:5300']
+max_clients = 2500
+#user_name = "nobody"
+ipv4_servers = true
+ipv6_servers = true
+dnscrypt_servers = true
+doh_servers = true
+require_dnssec = true
+require_nolog = true
+require_nofilter = true
+force_tcp = true
+# proxy = "socks5://127.0.0.1:9050"
+timeout = 2500
+keepalive = 30
+lb_strategy = 'p2'
+log_level = 0
+log_file = 'dnscrypt-proxy.log'
+use_syslog = false
+cert_refresh_delay = 240
+dnscrypt_ephemeral_keys = false
+tls_disable_session_tickets = false
+tls_cipher_suite = [52392, 49199]
+#fallback_resolver = '9.9.9.9:53'
+ignore_system_dns = false
+netprobe_timeout = 30
+# offline_mode = false
+log_files_max_size = 10
+log_files_max_age = 7
+log_files_max_backups = 1
+
+#########################
+#        Filters        #
+#########################
+block_ipv6 = false
+
+##################################################################################
+#        Route queries for specific domains to a dedicated set of servers        #
+##################################################################################
+forwarding_rules = 'dnscrypt-forwarding-rules.txt'
+
+###############################
+#        Cloaking rules       #
+###############################
+# cloaking_rules = 'dnscrypt-cloaking-rules.txt'
+
+###########################
+#        DNS cache        #
+###########################
+cache = false
+cache_size = 512
+cache_min_ttl = 600
+cache_max_ttl = 86400
+cache_neg_min_ttl = 60
+cache_neg_max_ttl = 600
+
+###############################
+#        Query logging        #
+###############################
+[query_log]
+  file = 'dnscrypt-query.log'
+  format = 'tsv'
+
+############################################
+#        Suspicious queries logging        #
+############################################
+[nx_log]
+  file = 'dnscrypt-nxdomain.log'
+  format = 'tsv'
+
+######################################################
+#        Pattern-based blocking (blacklists)         #
+######################################################
+[blacklist]
+  blacklist_file = 'dnscrypt-blacklist-domains.txt'
+  log_file = 'dnscrypt-blacklist-domains.log'
+  log_format = 'tsv'
+
+###########################################################
+#        Pattern-based IP blocking (IP blacklists)        #
+###########################################################
+[ip_blacklist]
+  blacklist_file = 'dnscrypt-blacklist-ips.txt'
+  log_file = 'dnscrypt-blacklist-ips.log'
+  log_format = 'tsv'
+
+######################################################
+#   Pattern-based whitelisting (blacklists bypass)   #
+######################################################
+[whitelist]
+  whitelist_file = 'dnscrypt-whitelist.txt'
+  log_file = 'dnscrypt-whitelisted.log'
+  log_format = 'tsv'
+
+#########################
+#        Servers        #
+#########################
+[static]
+  [static.'cisco']
+#  stamp = 'sdns://AQAAAAAAAAAADjIwOC42Ny4yMjAuMjIwILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ'
+  stamp = 'sdns://AQMAAAAAAAAADjIwOC42Ny4yMjAuMjIwILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ'
+  [static.'cloudflare']
+  stamp = 'sdns://AgcAAAAAAAAABzEuMC4wLjGgENk8mGSlIfMGXMOlIlCcKvq7AVgcrZxtjon911-ep0cg63Ul-I8NlFj4GplQGb_TTLiczclX57DvMV8Q-JdjgRgSZG5zLmNsb3VkZmxhcmUuY29tCi9kbnMtcXVlcnk'
+  [static.'cloudflare6']
+  stamp = 'sdns://AgcAAAAAAAAAGVsyNjA2OjQ3MDA6NDcwMDo6MTExMV06NTOgENk8mGSlIfMGXMOlIlCcKvq7AVgcrZxtjon911-ep0cg63Ul-I8NlFj4GplQGb_TTLiczclX57DvMV8Q-JdjgRgSZG5zLmNsb3VkZmxhcmUuY29tCi9kbnMtcXVlcnk'
+#  [static.'google']
+#  stamp = 'sdns://AgUAAAAAAAAAACDyXGrcc5eNecJ8nomJCJ-q6eCLTEn6bHic0hWGUwYQaA5kbnMuZ29vZ2xlLmNvbQ0vZXhwZXJpbWVudGFs'
+
+
+
