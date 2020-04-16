@@ -1,11 +1,35 @@
+# Created by newuser for 5.5.1
 # ~/.zshrc
 if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
   . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+## dirstack
+#-----------------------------
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ ! -f $DIRSTACKFILE ]]; then
+   mkdir -p $HOME/.cache/zsh
+fi
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
 
+DIRSTACKSIZE=20
+
+setopt autopushd pushdsilent pushdtohome
+
+## Remove duplicate entries
+setopt pushdignoredups
+
+## This reverts the +/- operators.
+setopt pushdminus
+#-----------------------------
+
+##
 #------------------------------
 # History stuff
 #------------------------------
@@ -48,8 +72,6 @@ bindkey "^[[F" end-of-line
 alias ls="ls --color -F"
 alias ll="ls --color -lh"
 alias spm="sudo pacman"
-alias gr="gvim --remote-silent"
-alias vr="vim --remote-silent"
 alias px="proxychains4"
 alias proxy='export all_proxy=http://127.0.0.1:1081'
 alias unproxy='unset all_proxy'
@@ -97,7 +119,8 @@ zstyle ':completion:*:killall:*'   force-list always
 # Window title
 #------------------------------
 case $TERM in
-  termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
+  
+termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
     precmd () {
       vcs_info
       print -Pn "\e]0;[%n@%M][%~]%#\a"
@@ -153,3 +176,6 @@ setprompt() {
   RPROMPT=$'${vcs_info_msg_0_}'
 }
 setprompt
+
+setopt HIST_IGNORE_DUPS
+
